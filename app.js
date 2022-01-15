@@ -14,11 +14,12 @@ var mongoDB = 'mongodb+srv://sarim:sarim@library.armc2.mongodb.net/local_library
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-
+var compression = require('compression');
+var helmet = require('helmet');
 var app = express();
-
+app.use(compression()); //Compress all routes
 // view engine setup
+app.use(helmet());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
